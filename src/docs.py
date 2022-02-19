@@ -24,11 +24,11 @@ log = None
 
 def cache_key(query):
     """Make filesystem-friendly cache key"""
-    key = "{}_{}".format(query)
+    key = query
     key = key.lower()
     key = re.sub(r"[^a-z0-9-_;.]", "-", key)
     key = re.sub(r"-+", "-", key)
-    # log.debug("Cache key : {!r} {!r} -> {!r}".format(query, version, key))
+    # log.debug("Cache key : {!r} -> {!r}".format(query, key))
     return key
 
 
@@ -36,15 +36,11 @@ def handle_result(api_dict):
     """Extract relevant info from API result"""
     result = {}
 
-    for key in {"objectID", "hierarchy", "content", "url", "anchor"}:
-        if key == "hierarchy":
-            api_dict[key] = OrderedDict(sorted(api_dict[key].items(), reverse=True))
-            for hierarchy_key, hierarchy_value in api_dict[key].items():
-                if hierarchy_value:
-                    result["title"] = hierarchy_value
-                    break
-        else:
+    for key in {"objectID", "name", "qualifiedName", "href", "type", "enclosedBy"}:
+        if key in api_dict:
             result[key] = api_dict[key]
+        else:
+            result[key] = None
 
     return result
 
@@ -121,12 +117,13 @@ def main(wf):
     for result in results:
         wf.add_item(
             uid=result["objectID"],
-            title=result["title"],
-            arg=result["url"],
+            title='{} {}'.format(result["name"], result["type"]),
+            subtitle='from {}'.format(result["enclosedBy"]["name"]) if result["enclosedBy"] is not None else "",
+            arg='https://api.flutter.dev/flutter/{}'.format(result["href"]),
             valid=True,
-            largetext=result["title"],
-            copytext=result["url"],
-            quicklookurl=result["url"],
+            largetext=result["qualifiedName"],
+            copytext=result["href"],
+            quicklookurl=result["href"],
             icon=Config.FLUTTER_ICON,
         )
         # log.debug(result)
