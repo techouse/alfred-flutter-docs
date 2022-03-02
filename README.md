@@ -29,5 +29,5 @@ Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in y
 
 Built using [Alfred-Workflow](https://github.com/deanishe/alfred-workflow).
 The lightning fast search is powered by [Algolia](https://www.algolia.com) which was generous enough to hand me a big 
-enough plan to fit a large enough chunk of the enormous official [Flutter search index](https://api.flutter.dev/flutter/index.json).
+enough plan to fit the whole [Flutter search index](https://api.flutter.dev/flutter/index.json).
 A big thank you to [@algolia](https://github.com/algolia) and [@redox](https://github.com/redox) :heart: :heart: :heart:

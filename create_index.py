@@ -20,7 +20,7 @@ if res.ok:
         "method": 4,
         "accessor": 4,
         "operator": 4,
-        # 'constant' : 4,                       # skip constants to keep the number of indices below the index cap
+        "constant": 4,
         "property": 4,
         "constructor": 4,
         "top-level property": 5,
@@ -29,15 +29,18 @@ if res.ok:
         "top-level constant": 5,
     }
 
-    filtered_data = [
+    full_data = [
         {
             **el,
-            **{"weight": filters[el["type"]]},  # add weights to make the result sort relevant
+            **{
+                "weight": filters[el["type"]] - 1
+                if el["packageName"] == "flutter"
+                else filters[el["type"]]
+            },
         }
         for el in data
-        if el["type"] in filters.keys()         # filter by the filters listed above
-        and el["packageName"] == "flutter"      # additionally, index only items with the "flutter" packageName
+        if el["type"] in filters.keys()
     ]
 
-    with open("filtered_index.json", "w") as out_fh:
-        json.dump(filtered_data, out_fh)
+    with open("full_index.json", "w") as out_fh:
+        json.dump(full_data, out_fh)
