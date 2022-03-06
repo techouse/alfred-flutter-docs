@@ -83,7 +83,7 @@ void main(List<String> arguments) async {
 
     final ArgResults args = parser.parse(arguments);
 
-    final String query = args['query'];
+    final String query = args['query'].replaceAll(RegExp(r'\s+'), ' ').trim();
 
     if (args['verbose']) {
       verbose = true;
