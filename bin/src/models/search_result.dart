@@ -38,7 +38,6 @@ class SearchResult {
               )
             : null;
 
-  @override
   Map<String, dynamic> toJson() => {
         'objectID': objectID,
         'name': name,
