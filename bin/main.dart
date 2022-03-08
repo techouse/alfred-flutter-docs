@@ -4,7 +4,6 @@ import 'package:alfred_workflow/alfred_workflow.dart'
     show AlfredItem, AlfredItemIcon, AlfredItemText, AlfredWorkflow;
 import 'package:algolia/algolia.dart' show AlgoliaQuerySnapshot;
 import 'package:args/args.dart' show ArgParser, ArgResults;
-import 'package:easy_debounce/easy_debounce.dart';
 
 import 'src/models/search_result.dart';
 import 'src/services/algolia_search.dart';
@@ -93,29 +92,21 @@ void main(List<String> arguments) async {
       stdout.writeln('Query: "$query"');
     }
 
-    EasyDebounce.debounce(
-      'search',
-      Duration(milliseconds: 250),
-      () async {
-        if (query.isEmpty) {
-          _showPlaceholder();
-        } else {
-          await _performSearch(query);
-        }
-
-        workflow.run();
-      },
-    );
+    if (query.isEmpty) {
+      _showPlaceholder();
+    } else {
+      await _performSearch(query);
+    }
   } on FormatException catch (err) {
     exitCode = 2;
     workflow.addItem(AlfredItem(title: err.toString()));
-    workflow.run();
   } catch (err) {
     exitCode = 1;
     workflow.addItem(AlfredItem(title: err.toString()));
-    workflow.run();
     if (verbose) {
       rethrow;
     }
+  } finally {
+    workflow.run();
   }
 }
