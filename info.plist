@@ -8,11 +8,36 @@
 	<string>Tools</string>
 	<key>connections</key>
 	<dict>
+		<key>93C30A65-5631-4CDD-8DE6-C9593E5E7A4C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0AE138D9-046B-4A45-A3F0-354650578D9C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>D850B7E1-B6F7-4A5E-8EF6-522CBF4E0A21</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F7C945B1-22DC-4A83-B710-8D829B587A8A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>F394C4FF-40C8-4047-A2BE-1128DDBE5508</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>F7C945B1-22DC-4A83-B710-8D829B587A8A</string>
+				<string>93C30A65-5631-4CDD-8DE6-C9593E5E7A4C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -32,6 +57,29 @@
 	<string>Flutter docs</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>./docs -u</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>0AE138D9-046B-4A45-A3F0-354650578D9C</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -84,6 +132,36 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>0</integer>
+						<key>matchstring</key>
+						<string>update:workflow</string>
+						<key>outputlabel</key>
+						<string>Update Workflow</string>
+						<key>uid</key>
+						<string>D850B7E1-B6F7-4A5E-8EF6-522CBF4E0A21</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>Open URL</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>93C30A65-5631-4CDD-8DE6-C9593E5E7A4C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>spaces</key>
@@ -105,6 +183,20 @@
 	<string>Search the Flutter documentation using Alfred</string>
 	<key>uidata</key>
 	<dict>
+		<key>0AE138D9-046B-4A45-A3F0-354650578D9C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>685</integer>
+			<key>ypos</key>
+			<integer>140</integer>
+		</dict>
+		<key>93C30A65-5631-4CDD-8DE6-C9593E5E7A4C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>460</integer>
+			<key>ypos</key>
+			<integer>280</integer>
+		</dict>
 		<key>F394C4FF-40C8-4047-A2BE-1128DDBE5508</key>
 		<dict>
 			<key>xpos</key>
@@ -115,15 +207,15 @@
 		<key>F7C945B1-22DC-4A83-B710-8D829B587A8A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>440</integer>
+			<integer>685</integer>
 			<key>ypos</key>
-			<integer>260</integer>
+			<integer>395</integer>
 		</dict>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.0.4</string>
+	<string>2.0.5</string>
 	<key>webaddress</key>
 	<string>https://github.com/techouse</string>
 </dict>

@@ -6,16 +6,23 @@ import 'package:alfred_workflow/alfred_workflow.dart'
         AlfredItemIcon,
         AlfredItemText,
         AlfredItems,
+        AlfredUpdater,
         AlfredWorkflow;
 import 'package:algolia/algolia.dart' show AlgoliaQuerySnapshot;
 import 'package:args/args.dart' show ArgParser, ArgResults;
 
+import 'src/constants/config.dart' show Config;
 import 'src/models/search_result.dart' show SearchResult;
 import 'src/services/algolia_search.dart' show AlgoliaSearch;
 
 final AlfredWorkflow workflow = AlfredWorkflow();
-
+final AlfredUpdater updater = AlfredUpdater(
+  githubRepositoryUrl: Config.githubRepositoryUrl,
+  currentVersion: Config.version,
+  updateInterval: Duration(days: 7),
+);
 bool verbose = false;
+bool update = false;
 
 void main(List<String> arguments) async {
   try {
@@ -25,8 +32,16 @@ void main(List<String> arguments) async {
 
     final ArgParser parser = ArgParser()
       ..addOption('query', abbr: 'q', mandatory: true)
-      ..addFlag('verbose', abbr: 'v', defaultsTo: false);
+      ..addFlag('verbose', abbr: 'v', defaultsTo: false)
+      ..addFlag('update', abbr: 'u', defaultsTo: false);
     final ArgResults args = parser.parse(arguments);
+
+    update = args['update'];
+    if (update) {
+      stdout.writeln('Updating workflow...');
+
+      return await updater.update();
+    }
 
     verbose = args['verbose'];
 
@@ -52,9 +67,25 @@ void main(List<String> arguments) async {
       rethrow;
     }
   } finally {
-    workflow.run();
+    if (!update) {
+      if (await updater.updateAvailable()) {
+        workflow.run(addToBeginning: updateItem);
+      } else {
+        workflow.run();
+      }
+    }
   }
 }
+
+const updateItem = AlfredItem(
+  title: 'Auto-Update available!',
+  subtitle: 'Press <enter> to auto-update to a new version of this workflow.',
+  arg: 'update:workflow',
+  match:
+  'Auto-Update available! Press <enter> to auto-update to a new version of this workflow.',
+  icon: AlfredItemIcon(path: 'alfredhatcog.png'),
+  valid: true,
+);
 
 void _showPlaceholder() {
   workflow.addItem(
