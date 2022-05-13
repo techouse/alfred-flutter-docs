@@ -1,7 +1,7 @@
 class Config {
   Config._();
 
-  static const String version = '2.1.0';
+  static const String version = '2.1.1';
   static final Uri githubRepositoryUrl =
       Uri.https('github.com', '/techouse/alfred-flutter-docs');
   static const String algoliaApplicationId = 'WODHKE4WZG';
