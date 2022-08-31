@@ -13,3 +13,5 @@ build/
 
 bin/query_cache/
 sign.sh
+.python-version
+full_index.json
