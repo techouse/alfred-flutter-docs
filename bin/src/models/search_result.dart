@@ -1,12 +1,17 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'search_result.g.dart';
+
+@JsonSerializable()
 class SearchResult {
   const SearchResult({
     required this.objectID,
     required this.name,
     required this.qualifiedName,
-    required this.href,
+    required String href,
     required this.type,
     required this.enclosedBy,
-  });
+  }) : href = 'https://api.flutter.dev/flutter/$href';
 
   final String objectID;
   final String name;
@@ -23,27 +28,8 @@ class SearchResult {
     'enclosedBy',
   ];
 
-  SearchResult.fromJson(Map<String, dynamic> json)
-      : objectID = json['objectID'] as String,
-        name = json['name'] as String,
-        qualifiedName = json['qualifiedName'] as String,
-        href = 'https://api.flutter.dev/flutter/${json['href']}',
-        type = json['type'] as String,
-        enclosedBy = json['enclosedBy'] != null
-            ? (json['enclosedBy'] as Map<String, dynamic>).map(
-                (key, value) => MapEntry(
-                  key,
-                  value?.toString(),
-                ),
-              )
-            : null;
+  factory SearchResult.fromJson(Map<String, dynamic> json) =>
+      _$SearchResultFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        'objectID': objectID,
-        'name': name,
-        'qualifiedName': qualifiedName,
-        'href': href,
-        'type': type,
-        'enclosedBy': enclosedBy,
-      };
+  Map<String, dynamic> toJson() => _$SearchResultToJson(this);
 }
