@@ -3,8 +3,8 @@ part of 'main.dart';
 final AlfredWorkflow _workflow = AlfredWorkflow();
 
 final AlfredUpdater _updater = AlfredUpdater(
-  githubRepositoryUrl: Config.githubRepositoryUrl,
-  currentVersion: Config.version,
+  githubRepositoryUrl: Uri.parse(Env.githubRepositoryUrl),
+  currentVersion: Env.appVersion,
   updateInterval: Duration(days: 7),
 );
 
