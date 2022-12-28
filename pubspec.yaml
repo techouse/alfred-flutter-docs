@@ -4,7 +4,7 @@ description: Search the Flutter documentation using Alfred
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 2.1.5
+version: 2.1.6
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
