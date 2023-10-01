@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import json
-
 import requests
 
 res = requests.get(
@@ -29,18 +28,44 @@ if res.ok:
         "top-level constant": 5,
     }
 
-    full_data = [
-        {
-            **el,
-            **{
-                "weight": filters[el["type"]] - 1
-                if el["packageName"] == "flutter"
-                else filters[el["type"]]
-            },
-        }
-        for el in data
-        if el["type"] in filters.keys()
-    ]
+    # index of kinds
+    kinds = {
+        0: "accessor",
+        1: "constant",
+        2: "constructor",
+        3: "class",
+        4: "dynamic",
+        5: "enum",
+        6: "extension",
+        7: "function",
+        8: "library",
+        9: "method",
+        10: "mixin",
+        11: "Never",
+        12: "package",
+        13: "parameter",
+        14: "prefix",
+        15: "property",
+        16: "SDK",
+        17: "topic",
+        18: "top-level constant",
+        19: "top-level property",
+        20: "typedef",
+        21: "type parameter",
+    }
+
+    full_data = []
+
+    for el in data:
+        if "kind" in el and el["kind"] in kinds:
+            el["type"] = kinds[el["kind"]]
+            el["weight"] = el["kind"]
+            del el["kind"]
+            if "enclosedBy" in el:
+                if "kind" in el["enclosedBy"]:
+                    el["enclosedBy"]["type"] = kinds[el["enclosedBy"]["kind"]]
+                    del el["enclosedBy"]["kind"]
+        full_data.append(el)
 
     with open("full_index.json", "w") as out_fh:
         json.dump(full_data, out_fh)
