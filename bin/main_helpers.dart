@@ -29,53 +29,56 @@ void _showPlaceholder() {
 }
 
 Future<void> _performSearch(String query) async {
-  final AlgoliaQuerySnapshot snapshot = await AlgoliaSearch.query(query);
+  try {
+    final SearchResponse searchResponse = await AlgoliaSearch.query(query);
 
-  if (snapshot.nbHits > 0) {
-    final AlfredItems items = AlfredItems(
-      snapshot.hits
-          .map(
-            (snapshot) => SearchResult.fromJson(snapshot.data),
-          )
-          .map(
-            (result) => AlfredItem(
-              uid: result.objectID,
-              title: '${result.name} ${result.type}',
-              subtitle: result.enclosedBy != null
-                  ? 'from ${result.enclosedBy!["name"]}'
-                  : '',
-              arg: result.href,
-              text: AlfredItemText(
-                copy: result.href,
-                largeType: result.qualifiedName,
+    if (searchResponse.nbHits > 0) {
+      final AlfredItems items = AlfredItems(
+        searchResponse.hits
+            .map((Hit hit) => SearchResult.fromJson(
+                <String, dynamic>{...hit, 'objectID': hit.objectID}))
+            .map(
+              (SearchResult result) => AlfredItem(
+                uid: result.objectID,
+                title: '${result.name} ${result.type}',
+                subtitle: result.enclosedBy != null
+                    ? 'from ${result.enclosedBy!["name"]}'
+                    : '',
+                arg: result.href,
+                text: AlfredItemText(
+                  copy: result.href,
+                  largeType: result.qualifiedName,
+                ),
+                quickLookUrl: result.href,
+                icon: AlfredItemIcon(path: 'icon.png'),
+                valid: true,
               ),
-              quickLookUrl: result.href,
-              icon: AlfredItemIcon(path: 'icon.png'),
-              valid: true,
-            ),
-          )
-          .toList(),
-    );
-    _workflow.addItems(items.items);
-  } else {
-    final Uri url = Uri.https(
-      'www.google.com',
-      '/search',
-      {'q': 'flutter $query'},
-    );
+            )
+            .toList(),
+      );
+      _workflow.addItems(items.items);
+    } else {
+      final Uri url = Uri.https(
+        'www.google.com',
+        '/search',
+        {'q': 'flutter $query'},
+      );
 
-    _workflow.addItem(
-      AlfredItem(
-        title: 'No matching answers found',
-        subtitle: 'Shall I try and search Google?',
-        arg: url.toString(),
-        text: AlfredItemText(
-          copy: url.toString(),
+      _workflow.addItem(
+        AlfredItem(
+          title: 'No matching answers found',
+          subtitle: 'Shall I try and search Google?',
+          arg: url.toString(),
+          text: AlfredItemText(
+            copy: url.toString(),
+          ),
+          quickLookUrl: url.toString(),
+          icon: AlfredItemIcon(path: 'google.png'),
+          valid: true,
         ),
-        quickLookUrl: url.toString(),
-        icon: AlfredItemIcon(path: 'google.png'),
-        valid: true,
-      ),
-    );
+      );
+    }
+  } finally {
+    AlgoliaSearch.dispose();
   }
 }
