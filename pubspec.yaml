@@ -14,7 +14,7 @@ dependencies:
   args: ^2.4.2
   alfred_workflow: ^0.5.1
   cli_script: ^1.0.0
-  envied: ^0.5.2
+  envied: ^0.5.3
   json_annotation: ^4.8.1
 
 dev_dependencies:
