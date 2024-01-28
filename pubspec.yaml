@@ -4,21 +4,21 @@ description: Search the Flutter documentation using Alfred
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 2.1.10
+version: 2.1.11
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
-  algoliasearch: ^1.2.0
+  algoliasearch: ^1.5.0
   args: ^2.4.2
-  alfred_workflow: ^0.5.1
+  alfred_workflow: ^0.6.1
   cli_script: ^1.0.0
-  envied: ^0.5.2
+  envied: ^0.5.3
   json_annotation: ^4.8.1
 
 dev_dependencies:
   build_runner: ^2.4.6
-  envied_generator: ^0.5.2
+  envied_generator: ^0.5.3
   json_serializable: ^6.7.1
   lints: ^3.0.0
