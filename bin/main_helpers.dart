@@ -32,7 +32,7 @@ Future<void> _performSearch(String query) async {
   try {
     final SearchResponse searchResponse = await AlgoliaSearch.query(query);
 
-    if (searchResponse.nbHits > 0) {
+    if ((searchResponse.nbHits ?? 0) > 0) {
       final AlfredItems items = AlfredItems(
         searchResponse.hits
             .map((Hit hit) => SearchResult.fromJson(
