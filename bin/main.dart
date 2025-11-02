@@ -38,8 +38,8 @@ void main(List<String> arguments) {
 
       _verbose = args['verbose'];
 
-      final Map<String, AlfredUserConfiguration>? userDefaults =
-          await _workflow.getUserDefaults();
+      final Map<String, AlfredUserConfiguration>? userDefaults = await _workflow
+          .getUserDefaults();
 
       final AlfredUserConfigurationCheckBox? useFileCache =
           userDefaults?[UserConfigKey.useFileCache.toString()]

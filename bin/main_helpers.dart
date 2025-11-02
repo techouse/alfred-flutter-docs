@@ -35,8 +35,12 @@ Future<void> _performSearch(String query) async {
     if ((searchResponse.nbHits ?? 0) > 0) {
       final AlfredItems items = AlfredItems(
         searchResponse.hits
-            .map((Hit hit) => SearchResult.fromJson(
-                <String, dynamic>{...hit, 'objectID': hit.objectID}))
+            .map(
+              (Hit hit) => SearchResult.fromJson(<String, dynamic>{
+                ...hit,
+                'objectID': hit.objectID,
+              }),
+            )
             .map(
               (SearchResult result) => AlfredItem(
                 uid: result.objectID,
@@ -58,20 +62,16 @@ Future<void> _performSearch(String query) async {
       );
       _workflow.addItems(items.items);
     } else {
-      final Uri url = Uri.https(
-        'www.google.com',
-        '/search',
-        {'q': 'flutter $query'},
-      );
+      final Uri url = Uri.https('www.google.com', '/search', {
+        'q': 'flutter $query',
+      });
 
       _workflow.addItem(
         AlfredItem(
           title: 'No matching answers found',
           subtitle: 'Shall I try and search Google?',
           arg: url.toString(),
-          text: AlfredItemText(
-            copy: url.toString(),
-          ),
+          text: AlfredItemText(copy: url.toString()),
           quickLookUrl: url.toString(),
           icon: AlfredItemIcon(path: 'google.png'),
           valid: true,

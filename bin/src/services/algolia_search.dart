@@ -23,5 +23,5 @@ class AlgoliaSearch {
         ),
       );
 
-  static dispose() => _client.dispose();
+  static void dispose() => _client.dispose();
 }
