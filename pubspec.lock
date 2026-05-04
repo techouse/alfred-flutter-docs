@@ -21,34 +21,34 @@ packages:
     dependency: transitive
     description:
       name: algolia_client_core
-      sha256: cffb099e46172839b6e50bf197d8bd4ff14903d763b2e3abaa4e2f779f311c54
+      sha256: "9695993c4f3802ed125962e28d7e0b69eba8e5d91e29c7993f85e7e2388300ea"
       url: "https://pub.dev"
     source: hosted
-    version: "1.40.0"
+    version: "1.49.0"
   algolia_client_insights:
     dependency: transitive
     description:
       name: algolia_client_insights
-      sha256: "47ee6ac41cf2bbc2afb3f197b86693e3794372019dc20c35213b285b35898ed1"
+      sha256: "9f734cd5267c3d7c6ffe6d6d025c581c94639f7ee488a3b124051e11f3d1b225"
       url: "https://pub.dev"
     source: hosted
-    version: "1.40.0"
+    version: "1.49.0"
   algolia_client_search:
     dependency: transitive
     description:
       name: algolia_client_search
-      sha256: "48ca6a5c07ba3a6d9148dda1c0dc29ec52868d95fcf62d0202a8610355d688a2"
+      sha256: "163ec1f67f7dbaac5f3cb7689343e9ee4aa0d081d1f7046fce9e67061e35d26c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.40.0"
+    version: "1.49.0"
   algoliasearch:
     dependency: "direct main"
     description:
       name: algoliasearch
-      sha256: "3b5c1f30e9e829ac98e30e8a437c4a0986382ef8646700749f1e0c5abf8b267a"
+      sha256: "22b6c1f43268d528cc9a7d48561c184e33dfb7181d7e8456719be0ec51523b05"
       url: "https://pub.dev"
     source: hosted
-    version: "1.40.0"
+    version: "1.49.0"
   analyzer:
     dependency: transitive
     description:
@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "8.4.1"
+  archive:
+    dependency: transitive
+    description:
+      name: archive
+      sha256: a96e8b390886ee8abb49b7bd3ac8df6f451c621619f52a26e815fdcf568959ff
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.9"
   args:
     dependency: "direct main"
     description:
@@ -257,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  ffi:
+    dependency: transitive
+    description:
+      name: ffi
+      sha256: "6d7fd89431262d8f3125e81b50d3847a091d846eafcd4fdb88dd06f36d705a45"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   file:
     dependency: transitive
     description:
@@ -417,6 +433,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.2"
+  posix:
+    dependency: transitive
+    description:
+      name: posix
+      sha256: "185ef7606574f789b40f289c233efa52e96dead518aed988e040a10737febb07"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.5.0"
   pub_semver:
     dependency: transitive
     description:

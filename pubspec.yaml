@@ -10,7 +10,7 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
-  algoliasearch: ^1.40.0
+  algoliasearch: ^1.49.0
   args: ^2.7.0
   alfred_workflow: ^1.2.0
   cli_script: ^1.0.0
