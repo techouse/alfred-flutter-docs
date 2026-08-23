@@ -1,6 +1,6 @@
 [package]
 name = "alfred_flutter_docs"
-version = "2.2.4"
+version = "2.3.0"
 edition = "2024"
 rust-version = "1.88"
 description = "Search the Flutter documentation using Alfred."
