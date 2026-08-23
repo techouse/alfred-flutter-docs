@@ -43,9 +43,9 @@ cargo install cargo-about --locked --features cli
 make ci
 ```
 
-`make package` creates the versioned `.alfredworkflow` archive. Runtime caches,
-`.env`, and the Python index-generation inputs are intentionally excluded from
-the package.
+`make package` creates the versioned universal `.alfredworkflow` archive. Runtime
+caches, `.env`, and the Python index-generation inputs are intentionally
+excluded from the package.
 
 ### Note
 
