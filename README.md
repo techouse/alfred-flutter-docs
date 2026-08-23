@@ -25,6 +25,28 @@ fl container
 
 Either press `⌘Y` to Quick Look the result, or press `<enter>` to open it in your web browser.
 
+## Development
+
+The workflow is built with Rust 1.88 or newer on macOS. Copy `.env.example` to
+`.env` and provide the three Algolia settings before building a release binary;
+the release target also accepts settings already exported in the environment.
+
+```sh
+cargo run -- -q "Container"
+```
+
+Install `cargo-about` before running the complete local check, because `make ci`
+generates the bundled third-party license notice:
+
+```sh
+cargo install cargo-about --locked --features cli
+make ci
+```
+
+`make package` creates the versioned `.alfredworkflow` archive. Runtime caches,
+`.env`, and the Python index-generation inputs are intentionally excluded from
+the package.
+
 ### Note
 
 The lightning fast search is powered by [Algolia](https://www.algolia.com) which was generous enough to hand me a big 

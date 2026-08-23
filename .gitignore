@@ -1,6 +1,5 @@
-# Files and directories created by pub.
-.dart_tool/
-.packages
+# Rust build output.
+target/
 
 # Conventional directory for build output.
 build/
@@ -11,11 +10,13 @@ build/
 # macOS specific
 .DS_Store
 
-bin/*_cache/
-sign.sh
 .python-version
 full_index.json
 
 .env
 env
 .history
+
+# Alfred runtime cache output.
+*_cache/
+*_cache_keys.json
