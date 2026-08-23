@@ -60,7 +60,7 @@ licenses:
 	@mkdir -p build
 	cargo-about generate --locked --fail --output-file build/THIRD_PARTY_LICENSES.html about.hbs
 
-package: build-release
+package: build-universal
 	@set -euo pipefail; \
 	VERSION="$$(awk '/^\[package\]$$/ { p = 1; next } p && /^\[/ { exit } p && /^version = / { gsub(/["[:space:]]/, "", $$3); print $$3; exit }' Cargo.toml)"; \
 	WORKFLOW_NAME="$${WORKFLOW_NAME:-flutter-docs}"; \
